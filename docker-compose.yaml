@@ -1,0 +1,17 @@
+services:
+  db:
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    restart: always
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - '8001:27017'
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - .env
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"

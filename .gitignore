@@ -1,6 +1,10 @@
 # Configuration files
 *.env
 
+# Databases
+*.sqlite3
+data/
+
 # Python
 env/
 __pycache__/
