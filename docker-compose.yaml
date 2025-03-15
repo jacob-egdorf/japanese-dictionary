@@ -6,6 +6,12 @@ services:
       - ./data/db:/data/db
     ports:
       - '8001:27017'
+  dbsetup:
+    build: .
+    entrypoint: ["python", "./scripts/init_dictionary.py"]
+    env_file:
+      - .env
+    restart: no
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -13,5 +19,7 @@ services:
       - .env
     volumes:
       - .:/code
+    depends_on:
+      - dbsetup
     ports:
       - "8000:8000"
