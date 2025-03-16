@@ -1,0 +1,16 @@
+.soft {
+    color: gray;
+    font-size: small;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav {
+      display: -ms-flexbox;
+      display: flex;
+    }
+  
+    .navbar-nav .nav-item {
+      -ms-flex: 1 0 auto;
+      flex: 1 0 auto;
+    }
+  }
