@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+import mongoengine
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -82,6 +84,12 @@ DATABASES = {
     }
 }
 
+# Connect to MongoDB database with jmdict data. 
+mongoengine.connect(
+    host='db',
+    port=27017,
+    db=os.environ.get('MONGODB_DATABASE'),
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
