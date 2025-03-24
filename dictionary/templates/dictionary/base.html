@@ -18,6 +18,11 @@
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" href="{% url 'home' %}">Japanese Dictionary</a>
+
+                <form class="d-flex" action="{% url 'search' %}" method="get">
+                    <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn my-2 my-sm-0" type="submit"><span class="material-symbols-outlined">Search</span></button>
+                </form>
             </nav>
         </div>
         <div class="row">

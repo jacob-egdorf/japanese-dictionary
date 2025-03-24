@@ -2,26 +2,6 @@
 
 {%  block content %}
 <div class="container">
-    <div class="entry">
-        <h2>{{ response.primary_reading }}</h2>
-        <div class="soft">Readings</div>
-        <div>{{ response.readings|join:", " }}</div>
-        {% if response.kanji %}
-        <div class="soft">Forms</div>
-        <div>{{ response.kanji|join:", " }}</div>
-        {% endif %}
-        {% for sense in response.senses %}
-        <p>
-            <div class="soft">{{ sense.parts_of_speech|join:", " }}</div>
-            <div>
-                <span class="soft">{{ forloop.counter }}.</span>
-                <span>{{ sense.glosses|join:", " }}</span>
-            </div>
-            {% if sense.reading_elements %}
-            <div class="soft">Only applies to {{ sense.reading_restrictions|join:", " }}</div>
-            {% endif %}
-        </p>
-        {% endfor %}
-    </div>
+{% include "dictionary/word-component.html" with data=response %}
 </div>
 {% endblock %}

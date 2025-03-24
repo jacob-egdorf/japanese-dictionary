@@ -1,0 +1,23 @@
+{%  block word %}
+<div class="entry">
+    <h2>{{ data.primary_reading }}</h2>
+    <div class="soft">Readings</div>
+    <div>{{ data.readings|join:", " }}</div>
+    {% if data.kanji %}
+    <div class="soft">Forms</div>
+    <div>{{ data.kanji|join:", " }}</div>
+    {% endif %}
+    {% for sense in data.senses %}
+    <p>
+        <div class="soft">{{ sense.parts_of_speech|join:", " }}</div>
+        <div>
+            <span class="soft">{{ forloop.counter }}.</span>
+            <span>{{ sense.glosses|join:", " }}</span>
+        </div>
+        {% if sense.reading_elements %}
+        <div class="soft">Only applies to {{ sense.reading_restrictions|join:", " }}</div>
+        {% endif %}
+    </p>
+    {% endfor %}
+</div>
+{% endblock %}
