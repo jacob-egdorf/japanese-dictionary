@@ -2,18 +2,17 @@ from django.db import models
 
 from mongoengine import *
 
-class JmdictSense(EmbeddedDocument):
+class JmdictSense(DynamicEmbeddedDocument):
     kanji_restrictions = ListField(StringField())
-    parts_of_speech = ListField(StringField())
+    pos = ListField(StringField())
     reading_restrictions = ListField(StringField())
-    glosses = ListField(StringField())
+    gloss = ListField(DictField())
 
 class JmdictEntry(Document):
-    entry_id = IntField()
-    kanji = ListField(StringField())
-    primary_reading = StringField()
-    readings = ListField(StringField())
-    senses = EmbeddedDocumentListField(JmdictSense)
+    ent_seq = IntField()
+    k_ele = ListField(DictField())
+    r_ele = ListField(DictField(), required=False)
+    sense = EmbeddedDocumentListField(JmdictSense)
 
     meta = {
         'collection': 'jmdict'

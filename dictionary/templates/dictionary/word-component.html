@@ -1,21 +1,42 @@
 {%  block word %}
 <div class="entry">
-    <h2>{{ data.primary_reading }}</h2>
-    <div class="soft">Readings</div>
-    <div>{{ data.readings|join:", " }}</div>
-    {% if data.kanji %}
-    <div class="soft">Forms</div>
-    <div>{{ data.kanji|join:", " }}</div>
+    {# Display entry heading as first kanji element if the entry has kanji elements #}
+    {# Else display as first reading element #}
+    {% if data.k_ele %}
+    <h2>{{ data.k_ele.0.keb }}</h2>
+    {% else %}
+    <h2>{{ data.r_ele.0.reb }}</h2>
     {% endif %}
-    {% for sense in data.senses %}
+
+    <div class="soft">Readings</div>
+    <div>
+    {% for reading in data.r_ele %}
+        {{ reading.reb }}{% if not forloop.last %},{% endif %}
+    {% endfor %}
+    </div>
+
+    {% if data.k_ele %}
+        <div class="soft">Forms</div>
+        <div>
+        {% for kanji in data.k_ele %}
+            {{ kanji.keb }}{% if not forloop.last %},{% endif %}
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    {% for sense in data.sense %}
     <p>
-        <div class="soft">{{ sense.parts_of_speech|join:", " }}</div>
+        <div class="soft">{{ sense.pos|join:", " }}</div>
         <div>
             <span class="soft">{{ forloop.counter }}.</span>
-            <span>{{ sense.glosses|join:", " }}</span>
+            <span>        
+            {% for gloss in sense.gloss %}
+                {{ gloss.text }}{% if not forloop.last %},{% endif %}
+            {% endfor %}
+            </span>
         </div>
-        {% if sense.reading_elements %}
-        <div class="soft">Only applies to {{ sense.reading_restrictions|join:", " }}</div>
+        {% if sense.stagr %}
+        <div class="soft">Only applies to {{ sense.stagr|join:", " }}</div>
         {% endif %}
     </p>
     {% endfor %}
