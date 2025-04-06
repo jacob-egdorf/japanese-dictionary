@@ -4,7 +4,7 @@
 <div class="container">
     {% for result in page_obj %}
         {% include "dictionary/word-component.html" with data=result %}
-        <a href="{% url 'word' result.entry_id %}">Info &raquo;</a>
+        <a href="{% url 'word' result.ent_seq %}">Info &raquo;</a>
         <hr>
     {% endfor %}
 
